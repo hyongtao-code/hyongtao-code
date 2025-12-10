@@ -4,6 +4,9 @@
 
 ## 🧩 Open-Source Contributions
 <p align="center">
+
+| Project | Commits |
+|--------|---------|
 | [**Dify**](https://github.com/langgenius/dify) | **{{DIFY_COMMITS}}** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
 | [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **{{CLOUDBERRY_COMMITS}}** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
 | [**vLLM**](https://github.com/vllm-project/vllm) | **{{VLLM_COMMITS}}** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
