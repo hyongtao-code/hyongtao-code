@@ -3,8 +3,8 @@
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=hyongtao-code&show_icons=true&theme=tokyonight&cache_seconds=7200&hide_border=true)
 
 ## 🧩 Open-Source Contributions
-<div align="center">
+<p align="center">
 | [**Dify**](https://github.com/langgenius/dify) | **{{DIFY_COMMITS}}** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
 | [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **{{CLOUDBERRY_COMMITS}}** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
 | [**vLLM**](https://github.com/vllm-project/vllm) | **{{VLLM_COMMITS}}** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
-</div>
+</p>
