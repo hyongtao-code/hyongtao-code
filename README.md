@@ -2,7 +2,7 @@
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=hyongtao-code&show_icons=true&theme=tokyonight&cache_seconds=7200&hide_border=true)
 
-## 🧩 Open-Source Contributions (Auto Updated)
+## 🧩 Open-Source Contributions
 
 | Project | Commits |
 |--------|---------|
