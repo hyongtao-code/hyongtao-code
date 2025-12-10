@@ -6,6 +6,6 @@
 
 | Project | Commits |
 |--------|---------|
-| Dify | **{{DIFY_COMMITS}}** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
-| Apache Cloudberry | **{{CLOUDBERRY_COMMITS}}** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
-| vLLM | **{{VLLM_COMMITS}}** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
+| Dify | **90** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
+| Apache Cloudberry | **1** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
+| vLLM | **6** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
