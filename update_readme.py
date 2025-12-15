@@ -5,9 +5,10 @@ import os
 USERNAME = "hyongtao-code"
 
 REPOS = {
-    "CLOUDBERRY_COMMITS": ("apache", "cloudberry"),
     "VLLM_COMMITS": ("vllm-project", "vllm"),
     "DIFY_COMMITS": ("langgenius", "dify"),
+    "CPYTHON_COMMITS": ("python", "cpython"),
+    "CLOUDBERRY_COMMITS": ("apache", "cloudberry"),
 }
 
 README_PATH = "README.md"
