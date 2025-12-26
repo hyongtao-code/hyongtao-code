@@ -1,81 +1,101 @@
 import os
 import re
+import time
 import requests
 
 USERNAME = "hyongtao-code"
 
 REPOS = {
-    "VLLM_PRS": ("vllm-project", "vllm"),
     "DIFY_PRS": ("langgenius", "dify"),
+    "VLLM_PRS": ("vllm-project", "vllm"),
     "CPYTHON_PRS": ("python", "cpython"),
     "CLOUDBERRY_PRS": ("apache", "cloudberry"),
 }
 
 README_PATH = "README.md"
+API = "https://api.github.com"
 
 
-def get_pr_count(owner: str, repo: str, username: str) -> int:
+def github_get(url: str, params: dict | None = None) -> dict:
     """
-    Count pull requests authored by `username` in a repo using GitHub Search API.
-    This works reliably even when commits are squashed or rebased.
+    Small helper with optional auth + basic retry for rate limits / transient failures.
     """
-    url = "https://api.github.com/search/issues"
-
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "pr-count-updater",
+        "User-Agent": "commit-count-updater",
     }
-
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    token = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
     if token:
         headers["Authorization"] = f"Bearer {token}"
 
-    query = f"repo:{owner}/{repo} is:pr author:{username}"
-    params = {
-        "q": query,
-        "per_page": 1,  # we only need total_count
-    }
+    last_exc = None
+    for attempt in range(1, 4):
+        try:
+            r = requests.get(url, headers=headers, params=params, timeout=20)
 
-    r = requests.get(url, headers=headers, params=params, timeout=30)
-    if r.status_code != 200:
-        raise RuntimeError(
-            f"GitHub Search API error {r.status_code} for {owner}/{repo}: {r.text}"
-        )
+            # Basic rate limit handling
+            if r.status_code == 403 and r.headers.get("X-RateLimit-Remaining") == "0":
+                reset = r.headers.get("X-RateLimit-Reset")
+                if reset and reset.isdigit():
+                    wait_s = max(0, int(reset) - int(time.time())) + 1
+                    print(f"Rate limited. Sleeping {wait_s}s...")
+                    time.sleep(wait_s)
+                    continue
 
-    return r.json()["total_count"]
+            r.raise_for_status()
+            return r.json()
+
+        except Exception as e:
+            last_exc = e
+            print(f"Request failed (attempt {attempt}/3): {e}")
+            time.sleep(1.5 * attempt)
+
+    raise RuntimeError(f"GitHub request failed after retries: {last_exc}")
 
 
-def replace_between_markers(content: str, key: str, value: int) -> str:
+def get_merged_pr_count(owner: str, repo: str, username: str) -> int:
     """
-    Replace content between:
-      <!--KEY_START--> ... <!--KEY_END-->
+    Count merged PRs created by `username` in `owner/repo`.
+    Uses Search API total_count.
     """
-    pattern = re.compile(
-        rf"(<!--{re.escape(key)}_START-->)(.*?)(<!--{re.escape(key)}_END-->)",
-        re.DOTALL,
-    )
-
-    if not pattern.search(content):
-        raise RuntimeError(
-            f"Marker for {key} not found in README.md "
-            f"(expected <!--{key}_START--> ... <!--{key}_END-->)"
-        )
-
-    return pattern.sub(rf"\g<1>{value}\g<3>", content)
+    q = f"repo:{owner}/{repo} is:pr is:merged author:{username} -is:draft"
+    data = github_get(f"{API}/search/issues", params={"q": q, "per_page": 1})
+    return int(data.get("total_count", 0))
 
 
-def update_readme() -> None:
-    with open(README_PATH, "r", encoding="utf-8") as f:
+def update_readme_inplace(path: str, counts: dict[str, int]) -> None:
+    with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    for key, (owner, repo) in REPOS.items():
-        count = get_pr_count(owner, repo, USERNAME)
-        print(f"{key}: {count}")
-        content = replace_between_markers(content, key, count)
+    # Replace the **...** immediately before the marker <!--KEY-->
+    # Example cell: **{{DIFY_PRS}}** <!--DIFY_PRS--> ▸ [View](...)
+    for key, value in counts.items():
+        marker = f"<!--{key}-->"
+        # **anything** <!--KEY-->  -> **value** <!--KEY-->
+        pattern = rf"\*\*[^*]+\*\*\s*{re.escape(marker)}"
+        repl = f"**{value}** {marker}"
 
-    with open(README_PATH, "w", encoding="utf-8") as f:
+        new_content, n = re.subn(pattern, repl, content)
+        if n == 0:
+            raise RuntimeError(
+                f"Marker not found or pattern mismatch for {key}. "
+                f"Make sure README contains something like: **...** <!--{key}-->"
+            )
+        content = new_content
+
+    with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
+def main():
+    counts = {}
+    for key, (owner, repo) in REPOS.items():
+        c = get_merged_pr_count(owner, repo, USERNAME)
+        counts[key] = c
+        print(f"{key} ({owner}/{repo}): {c}")
+
+    update_readme_inplace(README_PATH, counts)
+
+
 if __name__ == "__main__":
-    update_readme()
+    main()

@@ -5,11 +5,11 @@
 ## 🧩 Open-Source Contributions
 <p align="center">
 
-| Project | Pull Requests |
-|--------|---------------|
-| [**Dify**](https://github.com/langgenius/dify/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--DIFY_PRS_START-->104<!--DIFY_PRS_END-->** ▸ [View](https://github.com/langgenius/dify/pulls?q=is%3Apr+author%3Ahyongtao-code) |
-| [**vLLM**](https://github.com/vllm-project/vllm/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--VLLM_PRS_START-->6<!--VLLM_PRS_END-->** ▸ [View](https://github.com/vllm-project/vllm/pulls?q=is%3Apr+author%3Ahyongtao-code) |
-| [**CPython**](https://github.com/python/cpython/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--CPYTHON_PRS_START-->9<!--CPYTHON_PRS_END-->** ▸ [View](https://github.com/python/cpython/pulls?q=is%3Apr+author%3Ahyongtao-code) |
-| [**Apache Cloudberry**](https://github.com/apache/cloudberry/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--CLOUDBERRY_PRS_START-->6<!--CLOUDBERRY_PRS_END-->** ▸ [View](https://github.com/apache/cloudberry/pulls?q=is%3Apr+author%3Ahyongtao-code) |
+| Project | Merged PRs |
+|--------|------------|
+| [**Dify**](https://github.com/langgenius/dify) | **{{DIFY_PRS}}** <!--DIFY_PRS--> ▸ [View](https://github.com/langgenius/dify/pulls?q=is%3Apr+author%3Ahyongtao-code+is%3Amerged) |
+| [**vLLM**](https://github.com/vllm-project/vllm) | **{{VLLM_PRS}}** <!--VLLM_PRS--> ▸ [View](https://github.com/vllm-project/vllm/pulls?q=is%3Apr+author%3Ahyongtao-code+is%3Amerged) |
+| [**CPython**](https://github.com/python/cpython) | **{{CPYTHON_PRS}}** <!--CPYTHON_PRS--> ▸ [View](https://github.com/python/cpython/pulls?q=is%3Apr+author%3Ahyongtao-code+is%3Amerged) |
+| [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **{{CLOUDBERRY_PRS}}** <!--CLOUDBERRY_PRS--> ▸ [View](https://github.com/apache/cloudberry/pulls?q=is%3Apr+author%3Ahyongtao-code+is%3Amerged) |
 
 </p>

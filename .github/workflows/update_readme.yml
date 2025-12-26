@@ -5,16 +5,17 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 17 * * 4"   # Thursday 17:00 UTC (~ Thu 09:00 in Los Angeles, PST)
+    - cron: "0 1 * * 4"     # weekly
   workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,16 +25,15 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run PR counter
+      - name: Run updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python update_readme.py
 
       - name: Commit and push changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "Auto update PR counts"
-          git push
+          git commit -m "Auto update merged PR counts" || echo "No changes"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
