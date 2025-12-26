@@ -7,9 +7,9 @@
 
 | Project | Commits |
 |--------|---------|
-| [**Dify**](https://github.com/langgenius/dify) | **<!--DIFY_COMMITS_START-->0<!--DIFY_COMMITS_END-->** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
-| [**vLLM**](https://github.com/vllm-project/vllm) | **<!--VLLM_COMMITS_START-->0<!--VLLM_COMMITS_END-->** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
-| [**CPython**](https://github.com/python/cpython) | **<!--CPYTHON_COMMITS_START-->0<!--CPYTHON_COMMITS_END-->** ▸ [View](https://github.com/python/cpython/commits?author=hyongtao-code) |
-| [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **<!--CLOUDBERRY_COMMITS_START-->0<!--CLOUDBERRY_COMMITS_END-->** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
+| [**Dify**](https://github.com/langgenius/dify) | **<!--DIFY_COMMITS_START-->90<!--DIFY_COMMITS_END-->** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
+| [**vLLM**](https://github.com/vllm-project/vllm) | **<!--VLLM_COMMITS_START-->6<!--VLLM_COMMITS_END-->** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
+| [**CPython**](https://github.com/python/cpython) | **<!--CPYTHON_COMMITS_START-->1<!--CPYTHON_COMMITS_END-->** ▸ [View](https://github.com/python/cpython/commits?author=hyongtao-code) |
+| [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **<!--CLOUDBERRY_COMMITS_START-->1<!--CLOUDBERRY_COMMITS_END-->** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
 
 </p>
