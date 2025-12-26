@@ -1,12 +1,12 @@
 name: Update Commit Counts
 
 permissions:
-  contents: write   # allow workflow to push changes
+  contents: write
 
 on:
   schedule:
-    - cron: "0 1 * * 4"     # At 9:00 AM every Thursday
-  workflow_dispatch:        # Supports manual trigger
+    - cron: "0 17 * * 4"   # Thursday 17:00 UTC (~ Thu 09:00 in Los Angeles, PST)
+  workflow_dispatch:
 
 jobs:
   update:
@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,12 +25,15 @@ jobs:
         run: pip install requests
 
       - name: Run updater
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python update_readme.py
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "Auto update commit counts" || echo "No changes"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Auto update commit counts"
+          git push
