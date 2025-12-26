@@ -5,11 +5,11 @@
 ## 🧩 Open-Source Contributions
 <p align="center">
 
-| Project | Commits |
-|--------|---------|
-| [**Dify**](https://github.com/langgenius/dify) | **<!--DIFY_COMMITS_START-->90<!--DIFY_COMMITS_END-->** ▸ [View](https://github.com/langgenius/dify/commits?author=hyongtao-code) |
-| [**vLLM**](https://github.com/vllm-project/vllm) | **<!--VLLM_COMMITS_START-->6<!--VLLM_COMMITS_END-->** ▸ [View](https://github.com/vllm-project/vllm/commits?author=hyongtao-code) |
-| [**CPython**](https://github.com/python/cpython) | **<!--CPYTHON_COMMITS_START-->1<!--CPYTHON_COMMITS_END-->** ▸ [View](https://github.com/python/cpython/commits?author=hyongtao-code) |
-| [**Apache Cloudberry**](https://github.com/apache/cloudberry) | **<!--CLOUDBERRY_COMMITS_START-->1<!--CLOUDBERRY_COMMITS_END-->** ▸ [View](https://github.com/apache/cloudberry/commits?author=hyongtao-code) |
+| Project | Pull Requests |
+|--------|---------------|
+| [**Dify**](https://github.com/langgenius/dify/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--DIFY_PRS_START-->0<!--DIFY_PRS_END-->** ▸ [View](https://github.com/langgenius/dify/pulls?q=is%3Apr+author%3Ahyongtao-code) |
+| [**vLLM**](https://github.com/vllm-project/vllm/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--VLLM_PRS_START-->0<!--VLLM_PRS_END-->** ▸ [View](https://github.com/vllm-project/vllm/pulls?q=is%3Apr+author%3Ahyongtao-code) |
+| [**CPython**](https://github.com/python/cpython/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--CPYTHON_PRS_START-->0<!--CPYTHON_PRS_END-->** ▸ [View](https://github.com/python/cpython/pulls?q=is%3Apr+author%3Ahyongtao-code) |
+| [**Apache Cloudberry**](https://github.com/apache/cloudberry/pulls?q=is%3Apr+author%3Ahyongtao-code) | **<!--CLOUDBERRY_PRS_START-->0<!--CLOUDBERRY_PRS_END-->** ▸ [View](https://github.com/apache/cloudberry/pulls?q=is%3Apr+author%3Ahyongtao-code) |
 
 </p>

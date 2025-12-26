@@ -5,48 +5,44 @@ import requests
 USERNAME = "hyongtao-code"
 
 REPOS = {
-    "VLLM_COMMITS": ("vllm-project", "vllm"),
-    "DIFY_COMMITS": ("langgenius", "dify"),
-    "CPYTHON_COMMITS": ("python", "cpython"),
-    "CLOUDBERRY_COMMITS": ("apache", "cloudberry"),
+    "VLLM_PRS": ("vllm-project", "vllm"),
+    "DIFY_PRS": ("langgenius", "dify"),
+    "CPYTHON_PRS": ("python", "cpython"),
+    "CLOUDBERRY_PRS": ("apache", "cloudberry"),
 }
 
 README_PATH = "README.md"
 
 
-def get_commit_count(owner: str, repo: str, username: str) -> int:
-    url = f"https://api.github.com/repos/{owner}/{repo}/commits"
+def get_pr_count(owner: str, repo: str, username: str) -> int:
+    """
+    Count pull requests authored by `username` in a repo using GitHub Search API.
+    This works reliably even when commits are squashed or rebased.
+    """
+    url = "https://api.github.com/search/issues"
+
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "commit-count-updater",
+        "User-Agent": "pr-count-updater",
     }
 
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if token:
         headers["Authorization"] = f"Bearer {token}"
 
+    query = f"repo:{owner}/{repo} is:pr author:{username}"
     params = {
-        "author": username,
-        "per_page": 1,
+        "q": query,
+        "per_page": 1,  # we only need total_count
     }
 
     r = requests.get(url, headers=headers, params=params, timeout=30)
-
     if r.status_code != 200:
         raise RuntimeError(
-            f"GitHub API error {r.status_code} for {owner}/{repo}: {r.text}"
+            f"GitHub Search API error {r.status_code} for {owner}/{repo}: {r.text}"
         )
 
-    # No pagination → 0 or 1 commit
-    if "Link" not in r.headers:
-        return len(r.json())
-
-    link = r.headers["Link"]
-    m = re.search(r"[?&]page=(\d+)>; rel=\"last\"", link)
-    if not m:
-        return len(r.json())
-
-    return int(m.group(1))
+    return r.json()["total_count"]
 
 
 def replace_between_markers(content: str, key: str, value: int) -> str:
@@ -73,7 +69,7 @@ def update_readme() -> None:
         content = f.read()
 
     for key, (owner, repo) in REPOS.items():
-        count = get_commit_count(owner, repo, USERNAME)
+        count = get_pr_count(owner, repo, USERNAME)
         print(f"{key}: {count}")
         content = replace_between_markers(content, key, count)
 
